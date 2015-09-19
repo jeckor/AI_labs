@@ -1,0 +1,7 @@
+F:\Проекты\ИИ\laba2\laba2\bin\Debug\laba2.exe
+F:\Проекты\ИИ\laba2\laba2\bin\Debug\laba2.pdb
+F:\Проекты\ИИ\laba2\laba2\obj\x86\Debug\laba2.Form1.resources
+F:\Проекты\ИИ\laba2\laba2\obj\x86\Debug\laba2.Properties.Resources.resources
+F:\Проекты\ИИ\laba2\laba2\obj\x86\Debug\laba2.csproj.GenerateResource.Cache
+F:\Проекты\ИИ\laba2\laba2\obj\x86\Debug\laba2.exe
+F:\Проекты\ИИ\laba2\laba2\obj\x86\Debug\laba2.pdb
