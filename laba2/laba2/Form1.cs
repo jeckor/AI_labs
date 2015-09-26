@@ -27,19 +27,30 @@ namespace laba2
             etalon3 = new Button[5, 5];
             user_picture = new Button[5, 5];
 
-            CreateEtalon(etalon1, etalon1_panel);
-            CreateEtalon(etalon2, etalon2_panel);
-            CreateEtalon(etalon3, etalon3_panel);
+            CreatePictures(etalon1, etalon2, etalon3, user_picture);
 
         }
-        private void CreateEtalon(Button[,] etalon, Panel panel)
+        //general functions
+        private void CreatePictures(Button[,] etalon1, Button[,] etalon2, Button[,] etalon3, Button[,] userpicture)
         {
-            int X = panel.Location.X;
+            //etalon1
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
-                    CreateEtalonButton(panel.Name + i * j, X + 30 * i, 15 + 30 * j, (Empty_or_Cell()) ? "#" : "", etalon[i, j], panel);
+                    CreatePictureButton(picture_panel.Name + i * j, picture_panel.Location.X + 30 * i, 15 + 30 * j, (Empty_or_Cell()) ? "#" : "", etalon1[i, j]);
+            //etalon2
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                    CreatePictureButton(picture_panel.Name + i * j, picture_panel.Location.X + 180 + 30 * i, 15 + 30 * j, (Empty_or_Cell()) ? "#" : "", etalon2[i, j]);
+            //etalon3
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                    CreatePictureButton(picture_panel.Name + i * j, picture_panel.Location.X + 360 + 30 * i, 15 + 30 * j, (Empty_or_Cell()) ? "#" : "", etalon3[i, j]);
+            //userpicture
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                    CreatePictureButton(picture_panel.Name + i * j, picture_panel.Location.X + 580 + 30 * i, 15 + 30 * j, "", user_picture[i, j]);
         }
-        private void CreateEtalonButton(string name, int x, int y, string text, Button button, Panel panel)
+        private void CreatePictureButton(string name, int x, int y, string text, Button button)
         {
             button = new Button();
             button.Location = new Point(x, y);
@@ -47,15 +58,16 @@ namespace laba2
             button.Size = new Size(25, 25);
             button.Text = text;
             button.Click += new EventHandler(Etalon_UserPicture_Click);
-            panel.Controls.Add(button);
+            picture_panel.Controls.Add(button);
         }
+        //additional functions
         private bool Empty_or_Cell()    //if true - cell
         {
             Random rnd = new Random();
             int res = rnd.Next(100);
             return (res > 50) ? true : false;
         }
-
+        //events
         private void Etalon_UserPicture_Click(object sender, EventArgs e)
         {
             if (((Button)sender).Text == "#")
