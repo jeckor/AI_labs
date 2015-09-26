@@ -14,3 +14,11 @@ F:\Projects\ИИ\laba2\laba2\obj\x86\Debug\laba2.csprojResolveAssemblyReference.
 F:\Projects\ИИ\laba2\laba2\obj\x86\Debug\laba2.Form1.resources
 F:\Projects\ИИ\laba2\laba2\obj\x86\Debug\laba2.Properties.Resources.resources
 F:\Projects\ИИ\laba2\laba2\obj\x86\Debug\laba2.csproj.GenerateResource.Cache
+C:\Users\Администратор\Desktop\laba2\laba2\obj\x86\Debug\laba2.exe
+C:\Users\Администратор\Desktop\laba2\laba2\obj\x86\Debug\laba2.pdb
+C:\Users\Администратор\Desktop\laba2\laba2\bin\Debug\laba2.exe
+C:\Users\Администратор\Desktop\laba2\laba2\bin\Debug\laba2.pdb
+C:\Users\Администратор\Desktop\laba2\laba2\obj\x86\Debug\laba2.csprojResolveAssemblyReference.cache
+C:\Users\Администратор\Desktop\laba2\laba2\obj\x86\Debug\laba2.Form1.resources
+C:\Users\Администратор\Desktop\laba2\laba2\obj\x86\Debug\laba2.Properties.Resources.resources
+C:\Users\Администратор\Desktop\laba2\laba2\obj\x86\Debug\laba2.csproj.GenerateResource.Cache
