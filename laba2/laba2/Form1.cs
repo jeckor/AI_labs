@@ -12,7 +12,6 @@ namespace laba2
         Button[,] etalon4 = new Button[5, 5];
         Button[,] etalon5 = new Button[5, 5];
         Button[,] user_picture = new Button[5, 5];
-        double[,] weights = new double[5, 5];  //весовые коэффициенты 
         string more;
 
         public Form1()
@@ -345,7 +344,7 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon1[i, j].Text == more)
+                    if (etalon4[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
@@ -362,7 +361,7 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon1[i, j].Text == more)
+                    if (etalon5[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
@@ -483,9 +482,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if(temp_sum == 0)
-                        sum1 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                        sum1 += (int)Math.Pow(temp_sum, 2) * 0.1;
                     else
-                        sum1 += (int)Math.Pow(temp_sum, 2) * 2.0;
+                        sum1 += (int)Math.Pow(temp_sum, 2) * 1.0;
                 }
             weightevklid_label1.Text = "" + Math.Round(Math.Sqrt(sum1), 3);
             //etalon2
@@ -503,9 +502,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum2 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                        sum2 += (int)Math.Pow(temp_sum, 2) * 0.1;
                     else
-                        sum2 += (int)Math.Pow(temp_sum, 2) * 2.0;
+                        sum2 += (int)Math.Pow(temp_sum, 2) * 1.0;
                 }
             weightevklid_label2.Text = "" + Math.Round(Math.Sqrt(sum2), 3);
             //etalon3
@@ -523,9 +522,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum3 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                        sum3 += (int)Math.Pow(temp_sum, 2) * 0.1;
                     else
-                        sum3 += (int)Math.Pow(temp_sum, 2) * 2.0;
+                        sum3 += (int)Math.Pow(temp_sum, 2) * 1.0;
                 }
             weightevklid_label3.Text = "" + Math.Round(Math.Sqrt(sum3), 3);
             //etalon4
@@ -543,9 +542,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum4 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                        sum4 += (int)Math.Pow(temp_sum, 2) * 0.1;
                     else
-                        sum4 += (int)Math.Pow(temp_sum, 2) * 2.0;
+                        sum4 += (int)Math.Pow(temp_sum, 2) * 1.0;
                 }
             weightevklid_label4.Text = "" + Math.Round(Math.Sqrt(sum4), 3);
             //etalon5
@@ -563,9 +562,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum5 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                        sum5 += (int)Math.Pow(temp_sum, 2) * 0.1;
                     else
-                        sum5 += (int)Math.Pow(temp_sum, 2) * 2.0;
+                        sum5 += (int)Math.Pow(temp_sum, 2) * 1.0;
                 }
             weightevklid_label5.Text = "" + Math.Round(Math.Sqrt(sum5), 3);
         }
@@ -588,9 +587,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if(temp_sum == 0)
-                        sum1 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                        sum1 += (int)Math.Pow(temp_sum, koeff) * 0.1;
                     else
-                        sum1 += (int)Math.Pow(temp_sum, koeff) * 2.0;
+                        sum1 += (int)Math.Pow(temp_sum, koeff) * 1.0;
                 }
             weightsmunskiy_label1.Text = "" + Math.Round(Math.Sqrt(sum1), 3);
             //etalon2
@@ -608,9 +607,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum2 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                        sum2 += (int)Math.Pow(temp_sum, koeff) * 0.1;
                     else
-                        sum2 += (int)Math.Pow(temp_sum, koeff) * 2.0;
+                        sum2 += (int)Math.Pow(temp_sum, koeff) * 1.0;
                 }
             weightsmunskiy_label2.Text = "" + Math.Round(Math.Sqrt(sum2), 3);
             //etalon3
@@ -628,9 +627,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum3 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                        sum3 += (int)Math.Pow(temp_sum, koeff) * 0.1;
                     else
-                        sum3 += (int)Math.Pow(temp_sum, koeff) * 2.0;
+                        sum3 += (int)Math.Pow(temp_sum, koeff) * 1.0;
                 }
             weightsmunskiy_label3.Text = "" + Math.Round(Math.Sqrt(sum3), 3);
             //etalon4
@@ -648,9 +647,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum4 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                        sum4 += (int)Math.Pow(temp_sum, koeff) * 0.1;
                     else
-                        sum4 += (int)Math.Pow(temp_sum, koeff) * 2.0;
+                        sum4 += (int)Math.Pow(temp_sum, koeff) * 1.0;
                 }
             weightsmunskiy_label4.Text = "" + Math.Round(Math.Sqrt(sum4), 3);
             //etalon5
@@ -668,9 +667,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum5 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                        sum5 += (int)Math.Pow(temp_sum, koeff) * 0.1;
                     else
-                        sum5 += (int)Math.Pow(temp_sum, koeff) * 2.0;
+                        sum5 += (int)Math.Pow(temp_sum, koeff) * 1.0;
                 }
             weightsmunskiy_label5.Text = "" + Math.Round(Math.Sqrt(sum5), 3);
         }
@@ -692,9 +691,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum1 += Math.Abs(temp_sum) * 1.0;
+                        sum1 += Math.Abs(temp_sum) * 0.1;
                     else
-                        sum1 += Math.Abs(temp_sum) * 2.0;
+                        sum1 += Math.Abs(temp_sum) * 1.0;
                 }
             weightssummodule_label1.Text = "" + Math.Round(Math.Sqrt(sum1), 3);
             //etalon2
@@ -712,9 +711,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum2 += Math.Abs(temp_sum) * 1.0;
+                        sum2 += Math.Abs(temp_sum) * 0.1;
                     else
-                        sum2 += Math.Abs(temp_sum) * 2.0;
+                        sum2 += Math.Abs(temp_sum) * 1.0;
                 }
             weightssummodule_label2.Text = "" + Math.Round(Math.Sqrt(sum2), 3);
             //etalon3
@@ -732,9 +731,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum3 += Math.Abs(temp_sum) * 1.0;
+                        sum3 += Math.Abs(temp_sum) * 0.1;
                     else
-                        sum3 += Math.Abs(temp_sum) * 2.0;
+                        sum3 += Math.Abs(temp_sum) * 1.0;
                 }
             weightssummodule_label3.Text = "" + Math.Round(Math.Sqrt(sum3), 3);
             //etalon4
@@ -752,9 +751,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum4 += Math.Abs(temp_sum) * 1.0;
+                        sum4 += Math.Abs(temp_sum) * 0.1;
                     else
-                        sum4 += Math.Abs(temp_sum) * 2.0;
+                        sum4 += Math.Abs(temp_sum) * 1.0;
                 }
             weightssummodule_label4.Text = "" + Math.Round(Math.Sqrt(sum4), 3);
             //etalon5
@@ -772,9 +771,9 @@ namespace laba2
                         user = 0;
                     int temp_sum = etalon - user;
                     if (temp_sum == 0)
-                        sum5 += Math.Abs(temp_sum) * 1.0;
+                        sum5 += Math.Abs(temp_sum) * 0.1;
                     else
-                        sum5 += Math.Abs(temp_sum) * 2.0;
+                        sum5 += Math.Abs(temp_sum) * 1.0;
                 }
             weightssummodule_label5.Text = "" + Math.Round(Math.Sqrt(sum5), 3);
         }
