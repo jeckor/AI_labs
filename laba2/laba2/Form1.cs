@@ -6,13 +6,14 @@ namespace laba2
 {
     public partial class Form1 : Form
     {
-        Button[,] etalon1 = new System.Windows.Forms.Button[5, 5];
-        Button[,] etalon2 = new System.Windows.Forms.Button[5, 5];
-        Button[,] etalon3 = new System.Windows.Forms.Button[5, 5];
-        Button[,] etalon4 = new System.Windows.Forms.Button[5, 5];
-        Button[,] etalon5 = new System.Windows.Forms.Button[5, 5];
-        Button[,] user_picture = new System.Windows.Forms.Button[5, 5];
-        double[,] weights;  //весовые коэффициенты 
+        Button[,] etalon1 = new Button[5, 5];
+        Button[,] etalon2 = new Button[5, 5];
+        Button[,] etalon3 = new Button[5, 5];
+        Button[,] etalon4 = new Button[5, 5];
+        Button[,] etalon5 = new Button[5, 5];
+        Button[,] user_picture = new Button[5, 5];
+        double[,] weights = new double[5, 5];  //весовые коэффициенты 
+        string more;
 
         public Form1()
         {
@@ -20,15 +21,12 @@ namespace laba2
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            weights = new double[5, 5];
+            CreateBackgroundImage();
             CreatePictures(etalon1, etalon2, etalon3, etalon4, etalon5, user_picture);
-            Random rnd = new Random();
-            for (int i = 0; i < 5; i++)
-                for (int j = 0; j < 5; j++)
-                    weights[i, j] = rnd.NextDouble();
+            SetMore(ref more);
         }
         //general functions
-        private void CreatePictures(System.Windows.Forms.Button[,] etalon1, System.Windows.Forms.Button[,] etalon2, System.Windows.Forms.Button[,] etalon3, System.Windows.Forms.Button[,] etalon4, System.Windows.Forms.Button[,] etalon5, System.Windows.Forms.Button[,] userpicture)
+        private void CreatePictures(Button[,] etalon1, Button[,] etalon2, Button[,] etalon3, Button[,] etalon4, Button[,] etalon5, System.Windows.Forms.Button[,] userpicture)
         {
             //etalon1
             for (int i = 0; i < 5; i++)
@@ -55,18 +53,43 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                      user_picture[i, j]=CreatePicturesButton(picture_panel.Name + i * j, picture_panel.Location.X + 940 + 30 * i, 15 + 30 * j, "_");
         }
-        private System.Windows.Forms.Button CreatePicturesButton(string name, int x, int y, string text)
+        private Button CreatePicturesButton(string name, int x, int y, string text)
         {
-            System.Windows.Forms.Button button = new System.Windows.Forms.Button();
+            Button button = new Button();
             button.Location = new Point(x, y);
             button.Name = name;
             button.Size = new Size(25, 25);
             button.TabIndex = 0;
             button.Text = text;
+            button.ForeColor = Color.Black;
             button.UseVisualStyleBackColor = true;
             button.Click += new EventHandler(Etalon_UserPicture_Click);
             picture_panel.Controls.Add(button);
             return button;
+        }
+        private void SetMore(ref string more)
+        {
+            int count_cell = 0, count_empty = 0;
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    if (user_picture[i, j].Text == "#")
+                        count_cell++;
+                    else
+                        count_empty++;
+                }
+            if (count_cell > count_empty)
+                more = "#";
+            else
+                more = "_";
+        }
+        private void CreateBackgroundImage()
+        {
+            PictureBox background = new PictureBox();
+            this.Controls.Add(background);
+            background.Size = new Size(1500, 1500);
+            background.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            background.ImageLocation = "eye_4.jpg";
         }
         //additional functions
         private bool Empty_or_Cell()    //if true - cell
@@ -92,11 +115,11 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon1[i, j].Text == "#")
+                    if (etalon1[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -109,11 +132,11 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon2[i, j].Text == "#")
+                    if (etalon2[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -126,11 +149,11 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon3[i, j].Text == "#")
+                    if (etalon3[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -143,11 +166,11 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon4[i, j].Text == "#")
+                    if (etalon4[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -160,11 +183,11 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon5[i, j].Text == "#")
+                    if (etalon5[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -175,18 +198,18 @@ namespace laba2
         }
         private void Minskiy_Click(object sender, EventArgs e)
         {
-            const int koeff = 5;
-            int sum1 = 0, sum2 = 0, sum3 = 0;
+            const int koeff = 6;
+            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0, sum5 = 0;
             //etalon1
             for(int i = 0; i < 5; i++)
                 for(int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon1[i, j].Text == "#")
+                    if (etalon1[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -199,11 +222,11 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon2[i, j].Text == "#")
+                    if (etalon2[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -216,11 +239,11 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon3[i, j].Text == "#")
+                    if (etalon3[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -228,54 +251,143 @@ namespace laba2
                     sum3 += (int)Math.Pow(temp_sum, koeff);
                 }
             mynskyi_label3.Text = "" + Math.Round(Math.Sqrt(sum3), 3);
+            //etalon4
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon4[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    sum4 += (int)Math.Pow(temp_sum, 2);
+                }
+            mynskyi_label4.Text = "" + Math.Round(Math.Sqrt(sum4), 3);
+            //etalon5
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon5[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    sum5 += (int)Math.Pow(temp_sum, 2);
+                }
+            mynskyi_label5.Text = "" + Math.Round(Math.Sqrt(sum5), 3);
         }   //расстояние по Минскому
         private void SumModule_Click(object sender, EventArgs e)    //сумма моделуй разностей
         {
-            int sum1 = 0, sum2 = 0, sum3 = 0;
+            int sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0, sum5 = 0;
             //etalon1
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
                 {
-                    if (String.Compare(etalon1[i, j].Text, user_picture[i, j].Text) == 0)
-                        sum1++;
+                    byte etalon = 0, user = 0;
+                    if (etalon1[i, j].Text == more)
+                        etalon = 1;
                     else
-                        continue;
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    sum1 += Math.Abs(temp_sum);
                 }
             summodule_label1.Text = "" + Math.Round(Math.Sqrt(sum1), 3);
             //etalon2
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
                 {
-                    if (String.Compare(etalon2[i, j].Text, user_picture[i, j].Text) == 0)
-                        sum2++;
+                    byte etalon = 0, user = 0;
+                    if (etalon2[i, j].Text == more)
+                        etalon = 1;
                     else
-                        continue;
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    sum2 += Math.Abs(temp_sum); 
                 }
             summodule_label2.Text = "" + Math.Round(Math.Sqrt(sum2), 3);
             //etalon3
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
                 {
-                    if (String.Compare(etalon3[i, j].Text, user_picture[i, j].Text) == 0)
-                        sum3++;
+                    byte etalon = 0, user = 0;
+                    if (etalon3[i, j].Text == more)
+                        etalon = 1;
                     else
-                        continue;
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    sum3 += Math.Abs(temp_sum);
                 }
             summodule_label3.Text = "" + Math.Round(Math.Sqrt(sum3), 3);
+            //etalon4
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon1[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    sum4 += Math.Abs(temp_sum);
+                }
+            summodule_label4.Text = "" + Math.Round(Math.Sqrt(sum4), 3);
+            //etalon5
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon1[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    sum5 += Math.Abs(temp_sum);
+                }
+            summodule_label5.Text = "" + Math.Round(Math.Sqrt(sum5), 3);
         }
         private void Camberr_Click(object sender, EventArgs e)      //расстояние по Крамерру
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0;
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0, sum5 = 0;
             //etalon1
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon1[i, j].Text == "#")
+                    if (etalon1[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -288,11 +400,11 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon2[i, j].Text == "#")
+                    if (etalon2[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -305,11 +417,11 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon3[i, j].Text == "#")
+                    if (etalon3[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
@@ -317,26 +429,63 @@ namespace laba2
                     sum3 += temp_sum;
                 }
             camber_label3.Text = "" + Math.Round(Math.Sqrt(sum3), 3);
+            //etalon4
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon4[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    double temp_sum = Math.Abs((etalon - user)) / 1;
+                    sum4 += temp_sum;
+                }
+            camber_label4.Text = "" + Math.Round(Math.Sqrt(sum4), 3);
+            //etalon5
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon5[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    double temp_sum = Math.Abs((etalon - user)) / 1;
+                    sum5 += temp_sum;
+                }
+            camber_label5.Text = "" + Math.Round(Math.Sqrt(sum5), 3);
         }
-        //methods of calculation distance with random weights
+        //methods of calculation distance with weights
         private void WeightsEvklid_Click(object sender, EventArgs e)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0;
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0, sum5 = 0;
             //etalon1
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon1[i, j].Text == "#")
+                    if (etalon1[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
                     int temp_sum = etalon - user;
-                    sum1 += (int)Math.Pow(temp_sum, 2) * weights[i, j];
+                    if(temp_sum == 0)
+                        sum1 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                    else
+                        sum1 += (int)Math.Pow(temp_sum, 2) * 2.0;
                 }
             weightevklid_label1.Text = "" + Math.Round(Math.Sqrt(sum1), 3);
             //etalon2
@@ -344,16 +493,19 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon2[i, j].Text == "#")
+                    if (etalon2[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
                     int temp_sum = etalon - user;
-                    sum2 += (int)Math.Pow(temp_sum, 2) * weights[i, j];
+                    if (temp_sum == 0)
+                        sum2 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                    else
+                        sum2 += (int)Math.Pow(temp_sum, 2) * 2.0;
                 }
             weightevklid_label2.Text = "" + Math.Round(Math.Sqrt(sum2), 3);
             //etalon3
@@ -361,38 +513,84 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon3[i, j].Text == "#")
+                    if (etalon3[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
                     int temp_sum = etalon - user;
-                    sum3 += (int)Math.Pow(temp_sum, 2) * weights[i, j];
+                    if (temp_sum == 0)
+                        sum3 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                    else
+                        sum3 += (int)Math.Pow(temp_sum, 2) * 2.0;
                 }
             weightevklid_label3.Text = "" + Math.Round(Math.Sqrt(sum3), 3);
+            //etalon4
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon4[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    if (temp_sum == 0)
+                        sum4 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                    else
+                        sum4 += (int)Math.Pow(temp_sum, 2) * 2.0;
+                }
+            weightevklid_label4.Text = "" + Math.Round(Math.Sqrt(sum4), 3);
+            //etalon5
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon5[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    if (temp_sum == 0)
+                        sum5 += (int)Math.Pow(temp_sum, 2) * 1.0;
+                    else
+                        sum5 += (int)Math.Pow(temp_sum, 2) * 2.0;
+                }
+            weightevklid_label5.Text = "" + Math.Round(Math.Sqrt(sum5), 3);
         }
         private void WeightMynskiy_Click(object sender, EventArgs e)
         {
-            const int koeff = 5;
-            double sum1 = 0, sum2 = 0, sum3 = 0;
+            const int koeff = 6;
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0, sum5 = 0;
             //etalon1
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon1[i, j].Text == "#")
+                    if (etalon1[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
                     int temp_sum = etalon - user;
-                    sum1 += (int)Math.Pow(temp_sum, koeff) * weights[i,j];
+                    if(temp_sum == 0)
+                        sum1 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                    else
+                        sum1 += (int)Math.Pow(temp_sum, koeff) * 2.0;
                 }
             weightsmunskiy_label1.Text = "" + Math.Round(Math.Sqrt(sum1), 3);
             //etalon2
@@ -400,16 +598,19 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon2[i, j].Text == "#")
+                    if (etalon2[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
                     int temp_sum = etalon - user;
-                    sum2 += (int)Math.Pow(temp_sum, koeff) * weights[i, j];
+                    if (temp_sum == 0)
+                        sum2 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                    else
+                        sum2 += (int)Math.Pow(temp_sum, koeff) * 2.0;
                 }
             weightsmunskiy_label2.Text = "" + Math.Round(Math.Sqrt(sum2), 3);
             //etalon3
@@ -417,52 +618,165 @@ namespace laba2
                 for (int j = 0; j < 5; j++)
                 {
                     byte etalon = 0, user = 0;
-                    if (etalon3[i, j].Text == "#")
+                    if (etalon3[i, j].Text == more)
                         etalon = 1;
                     else
                         etalon = 0;
-                    if (user_picture[i, j].Text == "#")
+                    if (user_picture[i, j].Text == more)
                         user = 1;
                     else
                         user = 0;
                     int temp_sum = etalon - user;
-                    sum3 += (int)Math.Pow(temp_sum, koeff) * weights[i, j];
+                    if (temp_sum == 0)
+                        sum3 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                    else
+                        sum3 += (int)Math.Pow(temp_sum, koeff) * 2.0;
                 }
             weightsmunskiy_label3.Text = "" + Math.Round(Math.Sqrt(sum3), 3);
+            //etalon4
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon4[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    if (temp_sum == 0)
+                        sum4 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                    else
+                        sum4 += (int)Math.Pow(temp_sum, koeff) * 2.0;
+                }
+            weightsmunskiy_label4.Text = "" + Math.Round(Math.Sqrt(sum4), 3);
+            //etalon5
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon5[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    if (temp_sum == 0)
+                        sum5 += (int)Math.Pow(temp_sum, koeff) * 1.0;
+                    else
+                        sum5 += (int)Math.Pow(temp_sum, koeff) * 2.0;
+                }
+            weightsmunskiy_label5.Text = "" + Math.Round(Math.Sqrt(sum5), 3);
         }
         private void WeightsSumModule_Click(object sender, EventArgs e)
         {
-            double sum1 = 0, sum2 = 0, sum3 = 0;
+            double sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0, sum5 = 0;
             //etalon1
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
                 {
-                    if (String.Compare(etalon1[i, j].Text, user_picture[i, j].Text) == 0)
-                        sum1 += 1 * weights[i, j];
+                    byte etalon = 0, user = 0;
+                    if (etalon1[i, j].Text == more)
+                        etalon = 1;
                     else
-                        continue;
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    if (temp_sum == 0)
+                        sum1 += Math.Abs(temp_sum) * 1.0;
+                    else
+                        sum1 += Math.Abs(temp_sum) * 2.0;
                 }
             weightssummodule_label1.Text = "" + Math.Round(Math.Sqrt(sum1), 3);
             //etalon2
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
                 {
-                    if (String.Compare(etalon2[i, j].Text, user_picture[i, j].Text) == 0)
-                        sum2 += 1 * weights[i, j];
+                    byte etalon = 0, user = 0;
+                    if (etalon2[i, j].Text == more)
+                        etalon = 1;
                     else
-                        continue;
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    if (temp_sum == 0)
+                        sum2 += Math.Abs(temp_sum) * 1.0;
+                    else
+                        sum2 += Math.Abs(temp_sum) * 2.0;
                 }
             weightssummodule_label2.Text = "" + Math.Round(Math.Sqrt(sum2), 3);
             //etalon3
             for (int i = 0; i < 5; i++)
                 for (int j = 0; j < 5; j++)
                 {
-                    if (String.Compare(etalon3[i, j].Text, user_picture[i, j].Text) == 0)
-                        sum3 += 1 * weights[i, j];
+                    byte etalon = 0, user = 0;
+                    if (etalon3[i, j].Text == more)
+                        etalon = 1;
                     else
-                        continue;
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    if (temp_sum == 0)
+                        sum3 += Math.Abs(temp_sum) * 1.0;
+                    else
+                        sum3 += Math.Abs(temp_sum) * 2.0;
                 }
             weightssummodule_label3.Text = "" + Math.Round(Math.Sqrt(sum3), 3);
+            //etalon4
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon4[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    if (temp_sum == 0)
+                        sum4 += Math.Abs(temp_sum) * 1.0;
+                    else
+                        sum4 += Math.Abs(temp_sum) * 2.0;
+                }
+            weightssummodule_label4.Text = "" + Math.Round(Math.Sqrt(sum4), 3);
+            //etalon5
+            for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 5; j++)
+                {
+                    byte etalon = 0, user = 0;
+                    if (etalon5[i, j].Text == more)
+                        etalon = 1;
+                    else
+                        etalon = 0;
+                    if (user_picture[i, j].Text == more)
+                        user = 1;
+                    else
+                        user = 0;
+                    int temp_sum = etalon - user;
+                    if (temp_sum == 0)
+                        sum5 += Math.Abs(temp_sum) * 1.0;
+                    else
+                        sum5 += Math.Abs(temp_sum) * 2.0;
+                }
+            weightssummodule_label5.Text = "" + Math.Round(Math.Sqrt(sum5), 3);
         }
     }
 }
